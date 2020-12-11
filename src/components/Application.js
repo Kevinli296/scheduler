@@ -100,8 +100,6 @@ export default function Application(props) {
     })
   }, [])
 
-  // console.log(state.interviewers);
-
   const appointmentsList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
