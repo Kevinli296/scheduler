@@ -36,6 +36,10 @@ export function getAppointmentsForDay(state, day) {
 
 }
 
+export function getInterviewersForDay() {
+  
+}
+
 export function getInterview(state, interview) {
   if (interview !== null) {
     return {
