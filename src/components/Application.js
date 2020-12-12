@@ -88,10 +88,44 @@ export default function Application(props) {
   const setDay = day => setState({ ...state, day });
   // const setDays = days => setState(prev => ({ ...prev, days }));
 
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+    .then(() => {
+      setState({
+        ...state,
+        appointments
+      });
+    })
+
+    // console.log(id, interview);
+  }
+
+  function deleteInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { null }
+    }
+  }
+
   useEffect(() => {
     const daysURL = `http://localhost:8001/api/days`;
     const appointmentsURL = `http://localhost:8001/api/appointments`;
     const interviewersURL = `http://localhost:8001/api/interviewers`;
+    const reset = `http://localhost:8001/api/debug/reset`;
+    // UNCOMMENT TO RESET DB
+    // axios.get(reset)
+    // .then(() => {
+    // })
     Promise.all([
       axios.get(daysURL),
       axios.get(appointmentsURL),
@@ -109,7 +143,7 @@ export default function Application(props) {
       //   time={appointment.time}
       //   interview={appointment.interview}
       // />
-      <Appointment key={appointment.id} interviewers={dailyInterviewers} {...appointment} />
+      <Appointment key={appointment.id} interviewers={dailyInterviewers} interview={interview} bookInterview={bookInterview} deleteInterview={deleteInterview} {...appointment} />
     );
   })
 
