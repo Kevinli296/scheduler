@@ -85,6 +85,9 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
+  console.log(dailyAppointments);
+  console.log(dailyInterviewers);
+
   const setDay = day => setState({ ...state, day });
   // const setDays = days => setState(prev => ({ ...prev, days }));
 
@@ -110,12 +113,47 @@ export default function Application(props) {
     // console.log(id, interview);
   }
 
-  function deleteInterview(id, interview) {
+  function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
-      interview: { null }
-    }
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+    .then(() => {
+      setState({
+        ...state,
+        appointments
+      });
+    })
+
   }
+
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: {...interview}
+    }
+
+    const appointments = {
+      ...state.appointments,
+      [id]: interview
+    }
+
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+    .then(() => {
+      setState({
+        ...state,
+        appointments
+    });
+  })
+
+}
 
   useEffect(() => {
     const daysURL = `http://localhost:8001/api/days`;
@@ -143,7 +181,7 @@ export default function Application(props) {
       //   time={appointment.time}
       //   interview={appointment.interview}
       // />
-      <Appointment key={appointment.id} interviewers={dailyInterviewers} interview={interview} bookInterview={bookInterview} deleteInterview={deleteInterview} {...appointment} />
+      <Appointment {...appointment} key={appointment.id} interviewers={dailyInterviewers} interview={interview} bookInterview={bookInterview} cancelInterview={cancelInterview} />
     );
   })
 
