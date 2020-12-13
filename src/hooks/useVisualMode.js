@@ -8,7 +8,9 @@ export function useVisualMode(initial) {
     if (replace) {
       const newModes = [...history];
       newModes.pop();
+      // FOR SETTING NOT STALE STATE (remove push)
       newModes.push(newMode);
+      //setHistory(prev => ([...prev, mode]))
       setHistory(newModes);
       setMode(newMode);
     } else {
