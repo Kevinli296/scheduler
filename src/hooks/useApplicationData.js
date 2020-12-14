@@ -11,6 +11,13 @@ export function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  function spotsRemaining(spot) {
+    const selectedDay = state.days.find(dayToSelect => {
+      return dayToSelect.name === state.day
+    });
+    return selectedDay.spots += spot;
+  }
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -22,8 +29,10 @@ export function useApplicationData() {
       [id]: appointment
     };
 
+    const diff = !state.appointments[id].interview ? -1 : 0;
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
     .then(() => {
+      spotsRemaining(diff);
       setState({
         ...state,
         appointments
@@ -45,6 +54,7 @@ export function useApplicationData() {
 
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
     .then(() => {
+      spotsRemaining(1);
       setState({
         ...state,
         appointments
