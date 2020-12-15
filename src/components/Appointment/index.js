@@ -50,6 +50,7 @@ export default function Appointment(props) {
     .catch(() => transition(ERROR_DELETING, true));
   }
 
+  console.log(props.interview);
   // FOR DOUBLE BACK
   // function destroy(event) {
   //   transition(DELETING, true);
@@ -82,6 +83,7 @@ export default function Appointment(props) {
         <Form
           name={props.interview.student}
           interviewers={props.interviewers}
+          interviewer={props.interview.interviewer.id}
           onCancel={() => back()}
           onSave={save}
         />
@@ -112,6 +114,7 @@ export default function Appointment(props) {
         <Confirm
           message={"Are you sure you would like to delete?"}
           onConfirm={confirmedCancel}
+          onCancel={() => back()}
         />
       )}
       {
