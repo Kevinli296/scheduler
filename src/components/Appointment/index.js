@@ -50,7 +50,6 @@ export default function Appointment(props) {
     .catch(() => transition(ERROR_DELETING, true));
   }
 
-  console.log(props.interview);
   // FOR DOUBLE BACK
   // function destroy(event) {
   //   transition(DELETING, true);
