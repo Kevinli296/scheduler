@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, getByAltText, getByPlaceholderText, getAllByTestId, queryByText, prettyDOM } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, getByAltText, getByPlaceholderText, getAllByTestId, queryByText, queryByAltText, prettyDOM } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -78,11 +78,11 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
   );
 
   // 3. Click the "Delete" button on the booked appointment.
-  fireEvent.click(getByAltText(appointment, "Delete"));
+  fireEvent.click(queryByAltText(appointment, "Delete"));
   // 4. Check that the element with the confirmation message is shown.
   expect(getByText(appointment, /Are you sure you would like to delete?/i));
   // 5. Click the "Confirm" button on the confirmation.
-  fireEvent.click(getByText(appointment, "Confirm"));
+  fireEvent.click(queryByText(appointment, "Confirm"));
   // 6. Check that the element with the text "Deleting" is displayed.
   expect(getByText(appointment, "Deleting")).toBeInTheDocument();
   // 7. Wait until the element with the "Add" button is displayed.
@@ -92,7 +92,6 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
     queryByText(day, "Monday")
   );
 
-  debug();
   expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
 });
 
