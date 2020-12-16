@@ -14,11 +14,17 @@ xit("renders without crashing", () => {
 it("defaults to Monday and changes the schedule when a new day is selected", () => {
   const { getByText } = render(<Application />);
 
-  return waitForElement(() => getByText("Monday"))
-  .then(() => {
-    fireEvent.click(getByText("Tuesday"))
-    // expect(getByText("Leopold Silvers")).toBeInDocument();
-  });
+  // return waitForElement(() => getByText("Monday")) // Promise Chaining
+  // .then(() => {
+  //   fireEvent.click(getByText("Tuesday"))
+  //   // expect(getByText("Leopold Silvers")).toBeInDocument();
+  // });
+  
+  await waitForElement(() => getByText("Monday")); // Async/Await
+
+  fireEvent.click(getByText("Tuesday"));
+
+  expect(getByText("Leopold Silvers")).toBeInTheDocument();
 });
 
 
