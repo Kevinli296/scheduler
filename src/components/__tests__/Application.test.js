@@ -39,10 +39,6 @@ it("loads data, books an interview and reduces the spots remaining for the first
   // console.log(prettyDOM(appointments));
   const appointment = appointments[0];
   // console.log(prettyDOM(appointment));
-  const day = getAllByTestId(container, "day").find(day =>
-    queryByText(day, "Monday")
-  );
-  // console.log(prettyDOM(day));
 
   // 3. Click the "Add" button on the first empty appointment.
   fireEvent.click(getByAltText(appointment, "Add"));
@@ -64,7 +60,45 @@ it("loads data, books an interview and reduces the spots remaining for the first
   await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
 
   // 9. Check that the DayListItem with the text "Monday" also has the text "no spots remaining".
+  const day = getAllByTestId(container, "day").find(day =>
+    queryByText(day, "Monday")
+  );
   expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
 });
 
+it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  // 1. Render the Application.
+  const { container, debug } = render(<Application />);
+
+  // 2. Wait until the text "Archie Cohen" is displayed.
+  await waitForElement(() => getByText(container, "Archie Cohen"));
+
+  const appointment = getAllByTestId(container, "appointment").find(
+    appointment => queryByText(appointment, "Archie Cohen")
+  );
+
+  // 3. Click the "Delete" button on the booked appointment.
+  fireEvent.click(getByAltText(appointment, "Delete"));
+  // 4. Check that the element with the confirmation message is shown.
+  expect(getByText(appointment, /Are you sure you would like to delete?/i));
+  // 5. Click the "Confirm" button on the confirmation.
+  fireEvent.click(getByText(appointment, "Confirm"));
+  // 6. Check that the element with the text "Deleting" is displayed.
+  expect(getByText(appointment, "Deleting")).toBeInTheDocument();
+  // 7. Wait until the element with the "Add" button is displayed.
+  await waitForElement(() => getByAltText(appointment, "Add"));
+  // 8. Check that the DayListItem with the text "Monday" also has the text "1 spot remaining" (Because the previous test decreases the spots by 1).
+  const day = getAllByTestId(container, "day").find(day =>
+    queryByText(day, "Monday")
+  );
+
+  debug();
+  expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
+});
+
 })
+
+// "loads data, cancels an interview and increases the spots remaining for Monday by 1"
+// "loads data, edits an interview and keeps the spots remaining for Monday the same"
+// "shows the save error when failing to save an appointment"
+// "shows the delete error when failing to delete an existing appointment"
