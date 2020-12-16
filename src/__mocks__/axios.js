@@ -90,6 +90,15 @@ export default {
         statusText: "No content"
       });
     }
+  }),
+
+  delete: jest.fn(url => {
+    if (url.includes("/api/appointments/")) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "No content"
+      });
+    }
   })
 
 }
