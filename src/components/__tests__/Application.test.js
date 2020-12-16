@@ -169,11 +169,20 @@ it("shows the save error when failing to save an appointment", async () => {
     // 7. Check that the element with the text "Saving" is displayed.
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
     
-    // 8. Wait until the element with the error message is shown.
+    // 8. Wait until the element with the error message is displayed.
     await waitForElement(() => expect(getByText(appointment, /Could not save appointment./i)));
 
     // 9. Check that the element with the error message is displayed.
     expect(getByText(appointment, /Could not save appointment./i)).toBeInTheDocument();
+
+    // 10. Click the "Close" button on the error.
+    fireEvent.click(getByAltText(appointment, "Close"));
+
+    // 11.  Wait until the "Add" button is displayed.
+    await waitForElement(() => expect(getByAltText(appointment, "Add")));
+
+    // 12. Check that the "Add" button is displayed.
+    expect(getByAltText(appointment, "Add"));
 
 });
 
@@ -206,7 +215,16 @@ it("shows the delete error when failing to delete an appointment", async () => {
 
     // 8. Check that the element with the error message is displayed.
     expect(getByText(appointment, /Could not delete appointment./i)).toBeInTheDocument();
-    
+
+    // 9. Click the "Close" button on the error.
+    fireEvent.click(getByAltText(appointment, "Close"));
+
+    // 10. Wait until the text "Archie Cohen" is displayed.
+    await waitForElement(() => expect(getByText(appointment, "Archie Cohen")));
+
+    // 11. Check that the text "Archie Cohen" is displayed.
+    expect(getByText(appointment, "Archie Cohen"));
+
 });
 
 })
