@@ -8,13 +8,13 @@ export default function Form(props) {
   const [error, setError] = useState("");
 
   const reset = function() {
-    setName("")
-    setInterviewer(null)
+    setName("");
+    setInterviewer(null);
   }
 
   const cancel = function() {
-    reset()
-    props.onCancel()
+    reset();
+    props.onCancel();
   }
 
   const validate = function() {
@@ -56,6 +56,6 @@ export default function Form(props) {
         </section>
       </section>
     </main>
-  )
+  );
 
 }

@@ -3,11 +3,11 @@ import React from "react";
 export default function Show(props) {
 
   const cancel = function() {
-    props.onCancel()
+    props.onCancel();
   }
 
   const edit = function() {
-    props.onEdit()
+    props.onEdit();
   }
 
   return (
@@ -34,6 +34,6 @@ export default function Show(props) {
         </section>
       </section>
     </main>
-  )
+  );
 
 }
