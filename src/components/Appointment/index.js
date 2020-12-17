@@ -34,8 +34,8 @@ export default function Appointment(props) {
 
     transition(SAVING);
     props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(() => transition(ERROR_SAVING));
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVING));
   }
 
   function initialCancel() {
@@ -46,8 +46,8 @@ export default function Appointment(props) {
 
     transition(DELETING);
     props.cancelInterview(props.id)
-    .then(() => transition(EMPTY))
-    .catch(() => transition(ERROR_DELETING, true));
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETING, true));
   }
 
   return (
@@ -107,11 +107,6 @@ export default function Appointment(props) {
           onCancel={() => back()}
         />
       )}
-      {
-        // props.interview ?
-        // <Show student={props.interview.student} interviewer={props.interview.interviewer} /> :
-        // <Empty />
-      }
     </article>
   )
 

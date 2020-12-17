@@ -8,16 +8,14 @@ export function useVisualMode(initial) {
     if (replace) {
       const newModes = [...history];
       newModes.pop();
-      // FOR SETTING NOT STALE STATE (remove push)
       newModes.push(newMode);
-      //setHistory(prev => ([...prev, mode]))
       setHistory(newModes);
       setMode(newMode);
     } else {
-    const newModes = [...history];
-    newModes.push(newMode);
-    setHistory(newModes);
-    setMode(newMode);
+      const newModes = [...history];
+      newModes.push(newMode);
+      setHistory(newModes);
+      setMode(newMode);
     }
   }
 
@@ -25,10 +23,10 @@ export function useVisualMode(initial) {
     if (history.length === 1) {
       setMode(history[0]);
     } else {
-    const newModes = [...history];
-    newModes.pop();
-    setHistory(newModes);
-    setMode(newModes[newModes.length-1]);
+      const newModes = [...history];
+      newModes.pop();
+      setHistory(newModes);
+      setMode(newModes[newModes.length - 1]);
     }
   }
 
