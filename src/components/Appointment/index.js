@@ -35,7 +35,7 @@ export default function Appointment(props) {
     transition(SAVING);
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
-    .catch(() => transition(ERROR_SAVING, true));
+    .catch(() => transition(ERROR_SAVING));
   }
 
   function initialCancel() {
@@ -49,15 +49,6 @@ export default function Appointment(props) {
     .then(() => transition(EMPTY))
     .catch(() => transition(ERROR_DELETING, true));
   }
-
-  // FOR DOUBLE BACK
-  // function destroy(event) {
-  //   transition(DELETING, true);
-  //   props
-  //    .cancelInterview(props.id)
-  //    .then(() => transition(EMPTY))
-  //    .catch(error => transition(ERROR_DELETE, true));
-  //  }
 
   return (
     <article className="appointment" data-testid="appointment">
