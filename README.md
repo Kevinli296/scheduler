@@ -13,7 +13,6 @@ Interview Scheduler is a single-page app that allows a user to book, edit and de
 Install dependencies with `npm install`.
 
 ## Getting Started
-### To begin using Interview scheduler:
 
 #### Running Webpack Development Server
 
