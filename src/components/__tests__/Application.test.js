@@ -8,23 +8,17 @@ import axios from "axios";
 afterEach(cleanup);
 
 describe("Application", () => {
-xit("renders without crashing", () => {
-  render(<Application />);
-});
 
 it("defaults to Monday and changes the schedule when a new day is selected", async () => {
   const { getByText } = render(<Application />);
 
-  // return waitForElement(() => getByText("Monday")) // Promise Chaining
-  // .then(() => {
-  //   fireEvent.click(getByText("Tuesday"))
-  //   // expect(getByText("Leopold Silvers")).toBeInDocument();
-  // });
-  
+  // 1. Wait until the element "Monday" is displayed.
   await waitForElement(() => getByText("Monday")); // Async/Await
 
+  // 2. Click on "Tuesday" from the Day list.
   fireEvent.click(getByText("Tuesday"));
 
+  // 3. Check that the name "Leopold Silvers" is displayed.
   expect(getByText("Leopold Silvers")).toBeInTheDocument();
 });
 
@@ -178,11 +172,11 @@ it("shows the save error when failing to save an appointment", async () => {
     // 10. Click the "Close" button on the error.
     fireEvent.click(getByAltText(appointment, "Close"));
 
-    // 11.  Wait until the "Add" button is displayed.
-    await waitForElement(() => expect(getByAltText(appointment, "Add")));
+    // 11.  Wait until the placeholder text is displayed.
+    await waitForElement(() => expect(getByPlaceholderText(appointment, /enter student name/i)));
 
-    // 12. Check that the "Add" button is displayed.
-    expect(getByAltText(appointment, "Add"));
+    // 12. Check that the placeholder text is displayed.
+    expect(getByPlaceholderText(appointment, /enter student name/i));
 
 });
 
