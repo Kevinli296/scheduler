@@ -44,6 +44,18 @@ npm run storybook
 
 ## Screenshots
 
+!["Home page"](https://github.com/Kevinli296/scheduler/blob/master/docs/Home%20page.png?raw=true)
+
+!["Screenshot of booking/editing an appointment"](https://github.com/Kevinli296/scheduler/blob/master/docs/Booking%20or%20editing%20an%20appointment.png?raw=true)
+
+!["Saving your appointment"](https://github.com/Kevinli296/scheduler/blob/master/docs/Saving%20your%20appointment.png?raw=true)
+
+!["Showing your booked appointment"](https://github.com/Kevinli296/scheduler/blob/master/docs/Showing%20your%20booked%20appointment.png?raw=true)
+
+!["Confirming to delete your appointment"](https://github.com/Kevinli296/scheduler/blob/master/docs/Confirming%20to%20delete%20your%20appointment.png?raw=true)
+
+!["Deleting your appointment"](https://github.com/Kevinli296/scheduler/blob/master/docs/Deleting%20your%20appointment.png?raw=true)
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
